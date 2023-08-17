@@ -205,3 +205,67 @@ print(Z)
 print("# 0에서 1사이의 값으로 크기 10의 벡터 만들기")
 Z = np.linspace(0, 1, 11, endpoint=False)[1:]
 print(Z)
+
+
+print("# 크기 10의 랜덤 벡터 만들어 정렬")
+Z = np.random.random(10)
+Z.sort()
+print(Z)
+
+
+print("# np.sum 보다 1차원 배열 빠르게 합하기")
+Z = np.arange(10)
+print(np.add.reduce(Z))
+
+
+print("# 랜덤 배열 A B 같은지 확인")
+A = np.random.randint(0, 2, 5)
+B = np.random.randint(0, 2, 5)
+print("방법 1.")
+print(np.allclose(A, B))
+print("방법 2.")
+print(np.array_equal(A, B))
+
+
+print("# 읽기 전용 배열")
+Z = np.zeros(10)
+Z.flags.writeable = False
+# Z[0] = 1
+
+
+print("# 데카르트 좌표를 나타내는 랜덤 10x2 행렬을 극좌표로 변환")
+Z = np. random.random((10, 2))
+X, Y = Z[:, 0], Z[:, 1]
+R = np.sqrt(X**2 + Y**2)
+T = np.arctan2(Y, X)
+print(R)
+print(T)
+
+
+print("# 크기 10의 랜덤 벡터를 만들고 최대값 0으로 바꾸기")
+Z = np.random.random(10)
+Z[Z.argmax()] = 10
+print(Z)
+
+
+print("# [0,1]x[0,1] 영역을 포함하는 x 및 y 좌표로 구성된 배열 만들기")
+Z = np.zeros((5, 5), [('x', float), ('y', float)])
+Z['x'], Z['y'] = np.meshgrid(np.linspace(0, 1, 5), np.linspace(0, 1, 5))
+print(Z)
+
+
+print("# X와 Y의 두 배열이 주어지면 Cauchy 행렬 C(Cij = 1/(xi - yj) 구성하기")
+X = np.arange(8)
+Y = X + 0.5
+C = 1.0 / np.subtract.outer(X, Y)
+print(np.linalg.det(C))
+
+
+print("# numpy 스칼라 유형에 대해 표현 가능한 최소값과 최대값 인쇄")
+for dtype in [np.int8, np.int32, np.int64]:
+    print(np.iinfo(dtype).min)
+    print(np.iinfo(dtype).max)
+for dtype in [np.float32, np.float64]:
+    print(np.finfo(dtype).min)
+    print(np.finfo(dtype).max)
+    print(np.finfo(dtype).eps)
