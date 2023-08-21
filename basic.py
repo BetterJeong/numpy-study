@@ -269,3 +269,16 @@ for dtype in [np.float32, np.float64]:
     print(np.finfo(dtype).min)
     print(np.finfo(dtype).max)
     print(np.finfo(dtype).eps)
+
+
+print("# 배열의 모든 값 인쇄하기")
+np.set_printoptions(threshold=float("inf"))
+Z = np.zeros((16, 16))
+print(Z)
+
+
+print("# 벡터에서 (특정 스칼라에) 가장 가까운 값을 찾는 방법")
+Z = np.arange(100)
+v = np.random.uniform(0, 100)
+index = (np.abs(Z-v)).argmin()
+print(Z[index])
